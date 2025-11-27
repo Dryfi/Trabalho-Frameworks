@@ -1,0 +1,60 @@
+<div class="page">
+  <div class="page-title">
+    <div>
+      <h1>{{title}}</h1>
+      <div class="subtitle">Dados básicos do usuário + status e perfil.</div>
+    </div>
+    <a mat-stroked-button routerLink="/users">
+      <mat-icon>arrow_back</mat-icon>
+      Voltar
+    </a>
+  </div>
+
+  <div class="app-surface" style="padding: 16px; max-width: 760px;" *ngIf="!loading">
+    <form [formGroup]="form" (ngSubmit)="save()" class="grid" style="grid-template-columns: repeat(12, 1fr); gap: 12px;">
+      <mat-form-field appearance="outline" style="grid-column: span 6;">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="name" placeholder="Nome do usuário">
+        <mat-error *ngIf="form.controls.name.touched && form.controls.name.invalid">
+          Informe um nome válido (mínimo 3 caracteres).
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="grid-column: span 6;">
+        <mat-label>E-mail</mat-label>
+        <input matInput formControlName="email" placeholder="email@exemplo.com">
+        <mat-error *ngIf="form.controls.email.touched && form.controls.email.invalid">
+          Informe um e-mail válido.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="grid-column: span 6;">
+        <mat-label>Perfil</mat-label>
+        <mat-select formControlName="role">
+          <mat-option value="ADMIN">ADMIN</mat-option>
+          <mat-option value="USER">USER</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div style="grid-column: span 6; display:flex; align-items:center; padding: 6px 2px;">
+        <mat-slide-toggle formControlName="active">Ativo</mat-slide-toggle>
+      </div>
+
+      <div style="grid-column: span 12; display:flex; justify-content:flex-end; gap: 10px; margin-top: 8px;">
+        <a mat-button routerLink="/users">Cancelar</a>
+        <button mat-raised-button color="primary" type="submit">
+          <mat-icon>save</mat-icon>
+          Salvar
+        </button>
+      </div>
+    </form>
+
+    <div class="muted" style="margin-top: 10px; font-size: 12px;">
+      Depois de salvar, o projeto tenta criar/atualizar as configurações do usuário.
+    </div>
+  </div>
+
+  <div *ngIf="loading" style="display:grid; place-items:center; min-height: 45vh;">
+    <mat-icon style="opacity:.75;">hourglass_empty</mat-icon>
+  </div>
+</div>

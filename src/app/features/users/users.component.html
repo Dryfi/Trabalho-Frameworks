@@ -1,0 +1,80 @@
+<div class="page">
+  <div class="page-title">
+    <div>
+      <h1>Usuários</h1>
+      <div class="subtitle">CRUD completo + seleção do usuário (usado no Dashboard e configurações).</div>
+    </div>
+
+    <div style="display:flex; gap: 10px;">
+      <button mat-stroked-button (click)="refresh()">
+        <mat-icon>refresh</mat-icon>
+        Atualizar
+      </button>
+      <a mat-raised-button color="primary" routerLink="/users/new">
+        <mat-icon>person_add</mat-icon>
+        Novo usuário
+      </a>
+    </div>
+  </div>
+
+  <div class="app-surface" style="padding: 12px;" *ngIf="!loading">
+    <table mat-table [dataSource]="users" class="mat-elevation-z0" style="width:100%;">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td mat-cell *matCellDef="let u">
+          <div style="display:flex; align-items:center; gap: 10px;">
+            <mat-icon style="opacity:0.85;">person</mat-icon>
+            <div style="min-width:0;">
+              <div style="font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{u.name}}</div>
+              <div class="muted" style="font-size: 12px;">ID: {{u.id}}</div>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>E-mail</th>
+        <td mat-cell *matCellDef="let u">{{u.email}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef>Perfil</th>
+        <td mat-cell *matCellDef="let u">
+          <mat-chip>{{u.role}}</mat-chip>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let u">
+          <mat-chip [ngStyle]="{ background: u.active ? 'rgba(30, 180, 120, 0.20)' : 'rgba(255, 140, 0, 0.18)', border: u.active ? '1px solid rgba(30,180,120,0.35)' : '1px solid rgba(255,140,0,0.35)' }">
+            {{u.active ? 'Ativo' : 'Inativo'}}
+          </mat-chip>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef style="text-align:right;">Ações</th>
+        <td mat-cell *matCellDef="let u" style="text-align:right;">
+          <a mat-icon-button [routerLink]="['/users', u.id]" aria-label="Editar">
+            <mat-icon>edit</mat-icon>
+          </a>
+          <button mat-icon-button (click)="remove(u)" aria-label="Excluir">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <div class="muted" style="margin-top: 10px; font-size: 12px;">
+      Dica: o usuário selecionado no topo é usado no Dashboard e na tela de Configurações.
+    </div>
+  </div>
+
+  <div *ngIf="loading" style="display:grid; place-items:center; min-height: 40vh;">
+    <mat-spinner diameter="44"></mat-spinner>
+  </div>
+</div>

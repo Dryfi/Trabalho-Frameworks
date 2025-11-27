@@ -1,0 +1,78 @@
+.layout {
+  height: 100vh;
+}
+
+.side {
+  width: 270px;
+  margin: 14px;
+  border-radius: 18px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 14px;
+}
+
+.logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.text .name {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.text .tag {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.side-footer {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  right: 18px;
+  font-size: 12px;
+}
+
+.content {
+  padding: 14px 14px 14px 0;
+}
+
+.topbar {
+  margin: 0 0 14px 0;
+  border-radius: 18px;
+  display: flex;
+  gap: 12px;
+  min-height: 64px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  margin-top: 2px;
+}
+.headline { font-weight: 700; }
+.tiny { font-size: 12px; }
+
+.spacer { flex: 1; }
+
+.user-select {
+  width: 320px;
+  max-width: 50vw;
+}

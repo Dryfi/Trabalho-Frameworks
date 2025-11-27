@@ -1,0 +1,87 @@
+<div class="page">
+  <div class="page-title">
+    <div>
+      <h1>Configurações</h1>
+      <div class="subtitle">Essas configurações são **por usuário** e impactam o Dashboard.</div>
+    </div>
+
+    <div style="display:flex; gap: 10px;">
+      <button mat-stroked-button (click)="resetDefaults()">
+        <mat-icon>restart_alt</mat-icon>
+        Padrão
+      </button>
+      <button mat-raised-button color="primary" (click)="save()">
+        <mat-icon>save</mat-icon>
+        Salvar
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" style="display:grid; place-items:center; min-height: 45vh;">
+    <mat-spinner diameter="44"></mat-spinner>
+  </div>
+
+  <div class="grid" *ngIf="!loading">
+    <mat-card class="card" style="grid-column: span 6;">
+      <mat-card-content>
+        <div style="display:flex; align-items:center; justify-content:space-between; gap: 12px;">
+          <div>
+            <div style="font-weight:800; letter-spacing:-0.02em;">Preferências</div>
+            <div class="muted" style="font-size: 12px;">Tema, moeda e exibição.</div>
+          </div>
+          <mat-icon style="opacity:.8;">tune</mat-icon>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(12, 1fr); gap: 12px; margin-top: 12px;">
+          <mat-form-field appearance="outline" style="grid-column: span 6;">
+            <mat-label>Tema</mat-label>
+            <mat-select formControlName="theme" [disabled]="!userId">
+              <mat-option value="system">Sistema</mat-option>
+              <mat-option value="dark">Escuro</mat-option>
+              <mat-option value="light">Claro</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" style="grid-column: span 6;">
+            <mat-label>Moeda</mat-label>
+            <mat-select formControlName="currency" [disabled]="!userId">
+              <mat-option value="BRL">BRL</mat-option>
+              <mat-option value="USD">USD</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div style="grid-column: span 12; display:flex; align-items:center;">
+            <mat-slide-toggle formControlName="showTrends">Mostrar tendências nos cards</mat-slide-toggle>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card" style="grid-column: span 6;">
+      <mat-card-content>
+        <div style="display:flex; align-items:center; justify-content:space-between; gap: 12px;">
+          <div>
+            <div style="font-weight:800; letter-spacing:-0.02em;">Cards do Dashboard</div>
+            <div class="muted" style="font-size:12px;">Escolha quais cards aparecem para o usuário.</div>
+          </div>
+          <mat-icon style="opacity:.8;">dashboard_customize</mat-icon>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(12, 1fr); gap: 10px; margin-top: 12px;">
+          <div style="grid-column: span 6;"><mat-slide-toggle formControlName="portfolioValue">Patrimônio</mat-slide-toggle></div>
+          <div style="grid-column: span 6;"><mat-slide-toggle formControlName="dailyPnL">P&L diário</mat-slide-toggle></div>
+          <div style="grid-column: span 6;"><mat-slide-toggle formControlName="monthlyPnL">P&L mensal</mat-slide-toggle></div>
+          <div style="grid-column: span 6;"><mat-slide-toggle formControlName="positions">Posições</mat-slide-toggle></div>
+          <div style="grid-column: span 6;"><mat-slide-toggle formControlName="alerts">Alertas</mat-slide-toggle></div>
+          <div style="grid-column: span 6;"><mat-slide-toggle formControlName="notes">Notas</mat-slide-toggle></div>
+        </div>
+
+        <div class="muted" style="margin-top: 12px; font-size: 12px;">
+          Dica: troque o usuário no seletor do topo e veja o Dashboard mudar.
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <form [formGroup]="form" style="display:none;"></form>
+</div>
